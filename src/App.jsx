@@ -1,21 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { FaStar } from "react-icons/fa";
-import "daisyui/dist/full.css";
-
-const API_KEY = "your_omdb_api_key"; // Replace with your OMDb API key
-const API_URL = `https://www.omdbapi.com/?s=latest&apikey=${API_KEY}`;
+import { fetchMovies } from "./mockApi";
 
 function App() {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    fetch(API_URL)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.Search) {
-          setMovies(data.Search);
-        }
-      });
+    fetchMovies().then((data) => {
+      if (data.Search) {
+        setMovies(data.Search);
+      }
+    });
   }, []);
 
   return (
